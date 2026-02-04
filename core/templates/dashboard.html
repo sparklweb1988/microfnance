@@ -1,0 +1,156 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row text-center">
+  <!-- Borrowers -->
+  <div class="col-md-3 mb-3">
+    <div class="card text-white bg-primary shadow">
+      <div class="card-body">
+        <h6>Borrowers</h6>
+        <h2>{{ borrowers }}</h2>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loans -->
+  <div class="col-md-3 mb-3">
+    <div class="card text-white bg-success shadow">
+      <div class="card-body">
+        <h6>Loans</h6>
+        <h2>{{ loans }}</h2>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAR30 -->
+  <div class="col-md-3 mb-3">
+    <div class="card text-white bg-warning shadow">
+      <div class="card-body">
+        <h6>PAR30</h6>
+        <h2>{{ par30 }}</h2>
+      </div>
+    </div>
+  </div>
+
+  <!-- Total Repayments -->
+  <div class="col-md-3 mb-3">
+    <div class="card text-white bg-danger shadow">
+      <div class="card-body">
+        <h6>Total Repayments</h6>
+        <h2>{{ total_repayments }}</h2>
+      </div>
+    </div>
+  </div>
+
+  <!-- Total Collections -->
+  <!-- <div class="col-md-3 mb-3">
+    <div class="card text-white bg-info shadow">
+      <div class="card-body">
+        <h6>Total Collections</h6>
+        <h2>{{ total_collections }}</h2>
+      </div>
+    </div>
+  </div> -->
+
+  <!-- Active Loans -->
+  <div class="col-md-3 mb-3">
+    <div class="card text-white bg-secondary shadow">
+      <div class="card-body">
+        <h6>Active Loans</h6>
+        <h2>{{ active_loans }}</h2>
+      </div>
+    </div>
+  </div>
+
+  <!-- Overdue Loans -->
+  <div class="col-md-3 mb-3">
+    <div class="card text-white bg-dark shadow">
+      <div class="card-body">
+        <h6>Overdue Loans</h6>
+        <h2>{{ overdue_loans }}</h2>
+      </div>
+    </div>
+  </div>
+
+  <!-- Total Savings -->
+  <div class="col-md-3 mb-3">
+    <div class="card text-white bg-success shadow">
+      <div class="card-body">
+        <h6>Total Savings</h6>
+        <h2>{{ total_savings }}</h2>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ----------------------- -->
+<!-- GRAPHS BELOW CARDS -->
+<!-- ----------------------- -->
+<div class="row">
+  <!-- Loan Status Graph -->
+  <div class="col-md-6 mb-4">
+    <div class="card shadow">
+      <div class="card-body">
+        <h6 class="card-title">Loan Status Distribution</h6>
+        <canvas id="loanStatusChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- Financial Overview Graph -->
+  <div class="col-md-6 mb-4">
+    <div class="card shadow">
+      <div class="card-body">
+        <h6 class="card-title">Financial Overview</h6>
+        <canvas id="financialChart"></canvas>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  // Loan Status Pie Chart
+  new Chart(document.getElementById('loanStatusChart'), {
+    type: 'pie',
+    data: {
+      labels: ['Active', 'Overdue', 'PAR30', 'Closed'],
+      datasets: [{
+        data: [
+          {{ active_loans }},
+      {{ overdue_loans }},
+          {{ par30 }},
+    {{ closed_loans }}
+        ],
+    backgroundColor: ['#6c757d', '#dc3545', '#ffc107', '#28a745']
+      }]
+    },
+    options: { responsive: true }
+  });
+
+  // Financial Overview Bar Chart
+  new Chart(document.getElementById('financialChart'), {
+    type: 'bar',
+    data: {
+      labels: ['PAR30', 'Repayments', 'Collections', 'Savings'],
+      datasets: [{
+        label: 'Amount',
+        data: [
+          {{ par30 }},
+      {{ total_repayments }},
+          {{ total_collections }},
+    {{ total_savings }}
+        ],
+    backgroundColor: ['#ffc107', '#dc3545', '#17a2b8', '#28a745']
+      }]
+    },
+    options: {
+    responsive: true,
+    scales: {
+      y: { beginAtZero: true }
+    }
+  }
+  });
+</script>
+{% endblock %}

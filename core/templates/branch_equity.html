@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container-fluid mt-4">
+  <div class="card shadow-sm">
+    <div class="card-header bg-primary text-white">
+      <h5 class="mb-0">Branch Equity Report</h5>
+    </div>
+
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-bordered table-striped align-middle">
+          <thead class="table-dark">
+            <tr>
+              <th>Branch</th>
+              <th>Total Collections (₦)</th>
+              <th>Total Expenses (₦)</th>
+              <th>Branch Equity (₦)</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for row in data %}
+            <tr>
+              <td>{{ row.branch.name }}</td>
+
+              <td>
+                ₦{{ row.collections|floatformat:2 }}
+              </td>
+
+              <td>
+                ₦{{ row.expenses|floatformat:2 }}
+              </td>
+
+              <td>
+                <strong class="{% if row.equity < 0 %}text-danger{% else %}text-success{% endif %}">
+                  ₦{{ row.equity|floatformat:2 }}
+                </strong>
+              </td>
+            </tr>
+            {% empty %}
+            <tr>
+              <td colspan="4" class="text-center text-muted">
+                No branch equity data available
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

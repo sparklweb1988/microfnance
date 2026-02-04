@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<h4>Loan Schedule</h4>
+<table class="table table-sm">
+<tr><th>Due</th><th>Total</th><th>Status</th></tr>
+{% for s in schedule %}
+<tr>
+  <td>{{ s.due_date }}</td>
+  <td>{{ s.total_due }}</td>
+  <td>{% if s.is_paid %}Paid{% else %}Due{% endif %}</td>
+</tr>
+{% endfor %}
+</table>
+{% endblock %}

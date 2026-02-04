@@ -1,0 +1,30 @@
+{% extends "base_report.html" %}
+
+{% block report_table %}
+<table class="table table-bordered table-sm">
+  <thead class="table-light">
+    <tr>
+      <th>Date</th>
+      <th>Borrower</th>
+      <th>Loan</th>
+      <th>Amount</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for c in collections %}
+    <tr>
+      <td>{{ c.date }}</td>
+      <td>{{ c.loan.borrower.full_name }}</td>
+      <td>#{{ c.loan.id }}</td>
+      <td>₦{{ c.amount }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+  <tfoot>
+    <tr>
+      <th colspan="3">Total</th>
+      <th>₦{{ total }}</th>
+    </tr>
+  </tfoot>
+</table>
+{% endblock %}

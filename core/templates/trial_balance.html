@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+  <h4 class="mb-3">Trial Balance</h4>
+
+  <div class="card">
+    <div class="card-body">
+      <table class="table table-striped">
+        <thead class="table-dark">
+          <tr>
+            <th>Account</th>
+            <th>Amount (₦)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Total Loans</td>
+            <td>{{ loans }}</td>
+          </tr>
+          <tr>
+            <td>Total Savings</td>
+            <td>{{ savings }}</td>
+          </tr>
+          <tr>
+            <td>Total Expenses</td>
+            <td>{{ expenses }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+<h3>Savings</h3>
+<a href="{% url 'add_saving' %}" class="btn btn-primary mb-3">Add Saving</a>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Account #</th>
+      <th>Product</th>
+      <th>Ledger Balance</th>
+      <th>Last Transaction</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for s in savings %}
+    <tr>
+      <td>{{ s.name }}</td>
+      <td>{{ s.account_number }}</td>
+      <td>{{ s.product }}</td>
+      <td>{{ s.ledger_balance }}</td>
+      <td>{{ s.last_transaction }}</td>
+      <td>{{ s.status }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

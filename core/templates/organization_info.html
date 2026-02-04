@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4">
+    <h2>Organization Info</h2>
+    <div class="card p-4 shadow-sm">
+        <p><strong>Name:</strong> {{ organization.name }}</p>
+        <p><strong>Address:</strong> {{ organization.address }}</p>
+        <p><strong>Email:</strong> {{ organization.email }}</p>
+        <p><strong>Phone:</strong> {{ organization.phone }}</p>
+        <p><strong>Created At:</strong> {{ organization.created_at }}</p>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<h4>Loan Officer Performance</h4>
+<table class="table table-bordered">
+<tr><th>Officer</th><th>Portfolio</th></tr>
+{% for p in performance %}
+<tr>
+  <td>{{ p.loan_officer__user__username }}</td>
+  <td>{{ p.portfolio }}</td>
+</tr>
+{% endfor %}
+</table>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container-fluid">
+  <div class="d-flex justify-content-between mb-3">
+    <h4>Expenses</h4>
+    <a href="{% url 'add_expense' %}" class="btn btn-primary btn-sm">
+      + Add Expense
+    </a>
+  </div>
+
+  <div class="card">
+    <div class="card-body table-responsive">
+      <table class="table table-bordered table-hover">
+        <thead class="table-dark">
+          <tr>
+            <th>Date</th>
+            <th>Branch</th>
+            <th>Category</th>
+            <th>Vendor</th>
+            <th>Amount (₦)</th>
+            <th>Recorded By</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for expense in expenses %}
+          <tr>
+            <td>{{ expense.date }}</td>
+            <td>{{ expense.branch.name }}</td>
+            <td>{{ expense.category }}</td>
+            <td>{{ expense.vendor.name }}</td>
+            <td>{{ expense.amount }}</td>
+            <td>{{ expense.recorded_by }}</td>
+            <td>
+              <a href="{% url 'update_expense' expense.id %}"
+                 class="btn btn-sm btn-warning">
+                 Edit
+              </a>
+            </td>
+            
+          </tr>
+          {% empty %}
+          <tr>
+            <td colspan="6" class="text-center text-muted">No expenses recorded</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

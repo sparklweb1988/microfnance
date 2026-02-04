@@ -1,0 +1,25 @@
+<h3>Daily Collections Report</h3>
+<p>Date: {{ date }}</p>
+
+<table border="1" cellspacing="0" cellpadding="5" width="100%">
+  <tr>
+    <th>Date</th>
+    <th>Borrower</th>
+    <th>Loan</th>
+    <th>Amount</th>
+  </tr>
+
+  {% for c in collections %}
+  <tr>
+    <td>{{ c.date }}</td>
+    <td>{{ c.loan.borrower.full_name }}</td>
+    <td>#{{ c.loan.id }}</td>
+    <td>{{ c.amount }}</td>
+  </tr>
+  {% endfor %}
+
+  <tr>
+    <td colspan="3"><strong>Total</strong></td>
+    <td><strong>{{ total }}</strong></td>
+  </tr>
+</table>

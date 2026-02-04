@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4">
+    <h2>Add Saving</h2>
+    <div class="card p-4 shadow-sm">
+        <form method="POST">
+            {% csrf_token %}
+
+            <div class="mb-3">
+                <label for="borrower" class="form-label">Borrower</label>
+                <select class="form-select" id="borrower" name="borrower" required>
+                    <option value="">Select Borrower</option>
+                    {% for borrower in borrowers %}
+                        <option value="{{ borrower.id }}">{{ borrower.full_name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="name" class="form-label">Account Name</label>
+                <input type="text" class="form-control" id="name" name="name" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="account_number" class="form-label">Account Number</label>
+                <input type="text" class="form-control" id="account_number" name="account_number" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="product" class="form-label">Product</label>
+                <input type="text" class="form-control" id="product" name="product" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="deposit_amount" class="form-label">Deposit Amount</label>
+                <input type="number" step="0.01" class="form-control" id="deposit_amount" name="deposit_amount" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="status" class="form-label">Status</label>
+                <select class="form-select" id="status" name="status" required>
+                    <option value="Active">Active</option>
+                    <option value="Dormant">Dormant</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Add Saving</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

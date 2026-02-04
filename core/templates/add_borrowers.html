@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4">
+    <h2>Add Borrower</h2>
+    <div class="card p-4 shadow-sm">
+        <form method="POST">
+            {% csrf_token %}
+            
+            <div class="mb-3">
+                <label for="full_name" class="form-label">Full Name</label>
+                <input type="text" class="form-control" id="full_name" name="full_name" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="business" class="form-label">Business</label>
+                <input type="text" class="form-control" id="business" name="business">
+            </div>
+
+            <div class="mb-3">
+                <label for="unique_id" class="form-label">Unique ID</label>
+                <input type="text" class="form-control" id="unique_id" name="unique_id">
+            </div>
+
+            <div class="mb-3">
+                <label for="mobile" class="form-label">Mobile</label>
+                <input type="text" class="form-control" id="mobile" name="mobile">
+            </div>
+
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" name="email">
+            </div>
+
+            <div class="mb-3">
+                <label for="branch" class="form-label">Branch</label>
+                <select class="form-select" id="branch" name="branch" required>
+                    {% for branch in branches %}
+                        <option value="{{ branch.id }}">{{ branch.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="status" class="form-label">Status</label>
+                <select class="form-select" id="status" name="status" required>
+                    <option value="Active">Active</option>
+                    <option value="Inactive">Inactive</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Add Borrower</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

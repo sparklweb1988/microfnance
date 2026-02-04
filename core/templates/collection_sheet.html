@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+  <h3>Collection Sheet</h3>
+
+  <!-- Add Collection Form -->
+  <div class="card mb-4">
+    <div class="card-body">
+      <form method="post">
+        {% csrf_token %}
+        <div class="row g-3">
+          <div class="col-md-4">
+            <label>Loan</label>
+            <select name="loan" class="form-select" required>
+              <option value="">Select Loan</option>
+              {% for loan in loans %}
+              <option value="{{ loan.id }}">{{ loan.borrower.full_name }} - {{ loan.principal }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="col-md-3">
+            <label>Amount</label>
+            <input type="number" step="0.01" name="amount" class="form-control" required>
+          </div>
+          <div class="col-md-3">
+            <label>Date</label>
+            <input type="date" name="date" class="form-control" required>
+          </div>
+          <div class="col-md-2 d-flex align-items-end">
+            <button type="submit" class="btn btn-primary w-100">Add</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Collections Table -->
+  <div class="card">
+    <div class="card-body">
+      <table class="table table-bordered table-hover">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Borrower</th>
+            <th>Loan Amount</th>
+            <th>Paid Amount</th>
+            <th>Date</th>
+            <th>Posted By</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for c in collections %}
+          <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ c.loan.borrower.full_name }}</td>
+            <td>{{ c.loan.principal }}</td>
+            <td>{{ c.amount }}</td>
+            <td>{{ c.date }}</td>
+            <td>{{ c.posted_by.username }}</td>
+          </tr>
+          {% empty %}
+          <tr>
+            <td colspan="6" class="text-center">No collections found</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

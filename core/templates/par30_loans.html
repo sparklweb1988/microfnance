@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>PAR30 Loans</h2>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Borrower</th>
+      <th>Principal</th>
+      <th>Interest Rate</th>
+      <th>Status</th>
+      <th>Maturity</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for loan in loans %}
+    <tr>
+      <td>{{ loan.borrower.name }}</td>
+      <td>{{ loan.principal }}</td>
+      <td>{{ loan.interest_rate }}</td>
+      <td>{{ loan.status }}</td>
+      <td>{{ loan.maturity }}</td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="5" class="text-center">No PAR30 loans</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

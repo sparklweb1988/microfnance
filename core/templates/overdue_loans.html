@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Overdue Loans</h2>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Loan ID</th>
+      <th>Amount</th>
+      <th>Status</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for loan in overdue_loans %}
+    <tr>
+      <td>{{ loan.id }}</td>
+      <td>{{ loan.principal }}</td>
+      <td>{{ loan.status }}</td>
+      <td><a href="{% url 'loan_detail' loan.id %}" class="btn btn-info">Details</a></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

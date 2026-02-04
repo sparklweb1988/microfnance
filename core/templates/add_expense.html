@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+  <h4 class="mb-3">Add Expense</h4>
+
+  <div class="card">
+    <div class="card-body">
+      <form method="POST">
+        {% csrf_token %}
+
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Branch</label>
+            <select name="branch" class="form-select" required>
+              <option value="">Select Branch</option>
+              {% for branch in branches %}
+              <option value="{{ branch.id }}">{{ branch.name }}</option>
+              {% endfor %}
+            </select>
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Vendor</label>
+            <select name="vendor" class="form-select">
+              <option value="">Select Vendor</option>
+              {% for vendor in vendors %}
+              <option value="{{ vendor.id }}">{{ vendor.name }}</option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Category</label>
+            <select name="category" class="form-select" required>
+              <option>Rent</option>
+              <option>Salary</option>
+              <option>Fuel</option>
+              <option>Utilities</option>
+              <option>Maintenance</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Amount (₦)</label>
+            <input type="number" name="amount" class="form-control" step="0.01" required>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Description</label>
+          <textarea name="description" class="form-control" rows="3"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-success">Save Expense</button>
+        <a href="{% url 'expenses' %}" class="btn btn-secondary">Cancel</a>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

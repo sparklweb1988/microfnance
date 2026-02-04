@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+  <h4 class="mb-3">Profit & Loss Statement</h4>
+
+  <div class="card">
+    <div class="card-body">
+      <table class="table table-bordered">
+        <tr>
+          <th>Total Income</th>
+          <td>₦{{ income }}</td>
+        </tr>
+        <tr>
+          <th>Total Expenses</th>
+          <td>₦{{ expenses }}</td>
+        </tr>
+        <tr class="table-success">
+          <th>Net Profit</th>
+          <td><strong>₦{{ profit }}</strong></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

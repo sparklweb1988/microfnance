@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+<h3>Borrowers</h3>
+<a href="{% url 'add_borrower' %}" class="btn btn-primary mb-3">Add Borrower</a>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Full Name</th>
+      <th>Business</th>
+      <th>Unique ID</th>
+      <th>Mobile</th>
+      <th>Email</th>
+      <th>Total Paid</th>
+      <th>Loan Balance</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for b in borrowers %}
+    <tr>
+      <td>{{ b.full_name }}</td>
+      <td>{{ b.business }}</td>
+      <td>{{ b.unique_id }}</td>
+      <td>{{ b.mobile }}</td>
+      <td>{{ b.email }}</td>
+      <td>{{ b.total_paid }}</td>
+      <td>{{ b.loan_balance }}</td>
+      <td>{{ b.status }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
